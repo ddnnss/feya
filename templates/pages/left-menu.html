@@ -1,0 +1,12 @@
+<div class="main-content__sidemenu">
+    <ul class="sidemenu">
+        {% for item in leftMenu %}
+            <li class="sidemenu__item">
+                <a class="sidemenu__link"
+                   href="{% url 'event_page' item.event_url.name_slug %}">
+                    <img src="{{ item.icon.url }}" alt="">{{ item.event_url.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div><!--content__sidemenu-->

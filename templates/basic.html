@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <meta name="description" content="{{ description }}"/>
+    <meta name="keywords" content= "{{ keywords }}" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="{%  static 'css/main.css' %}">
+    <style>
+        .content a{
+            color: #00a6ff;
+            text-decoration: underline;
+        }
+        .content h1{
+            font-family: 'Montserrat Bold',sans-serif;
+        }
+        .content h2{
+            font-family: 'Montserrat Bold',sans-serif;
+            color: #e983c5;
+            font-size: 20px;
+            line-height: 25px;
+            margin: 5px 0 10px 0;
+        }
+        .content ul {
+            list-style-type: circle;
+            padding: 0 0 0 20px;
+        }
+        .content li{
+            list-style-type: circle;
+        }
+        .content p {
+            margin: 10px 0;
+        }
+        .content-title h1{
+             font-family: 'Montserrat Bold',sans-serif;
+            font-size: 28px;
+            color: #ef49b5;
+        }
+    </style>
+</head>
+<body>
+<div id="app">
+    {% include 'header.html' %}
+    {% block content %}
+    {% endblock %}
+    {% include 'footer.html' %}
+</div>
+{% block js %}
+
+{% endblock %}
+
+
+</body>
+
+</html>

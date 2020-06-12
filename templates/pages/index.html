@@ -1,0 +1,67 @@
+{% extends 'basic.html' %}
+{% load static %}
+
+{% block content %}
+    <main>
+  <section class="main-content">
+    <div class="container">
+      <div class="main-content_wrapper">
+        <div class="breadcrumbs">
+          <ul class="breadcrumbs-wrapper">
+            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="">Главная</a></li>
+            <li class="breadcrumbs-item">Мероприятия</li>
+          </ul>
+        </div>
+        <div class="news-wrapper">
+          <div class="news-item">
+          <div class="news-item-img">
+               <img src="http://placehold.it/500x200" alt="">
+            </div>
+            <p class="news-item-title">
+              Lorem ipsum dolor sit amet.
+            </p>
+            <p class="news-item-description">
+              Lorem ipsum dolor sissitatibus que labore recusandae repellendus sint!
+            </p>
+            <p class="news-item-more">
+              <a href="">Читать далee ...</a>
+            </p>
+          </div>
+          <div class="news-item">
+            <img src="http://placehold.it/500x200" alt="">
+            <p class="news-item-title">
+              Lorem ipsum dolor sit amet.
+            </p>
+            <p class="news-item-description">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deleniti dolor eum illo libero, maiores necessitatibus perspiciatis placeat quidem quo repellendus sint unde? Aperiam explicabo, itaque labore recusandae repellendus sint!
+            </p>
+            <p class="news-item-more">
+              <a href="">Читать далee ...</a>
+            </p>
+
+          </div>
+        </div><!--          news-wrapper-->
+        <div class="main-content__inner">
+       {% include 'pages/left-menu.html' %}
+          <div class="main-content__center">
+            {{ page_content | safe }}
+
+          </div><!--content__center-->
+        {% include 'pages/right-menu.html' %}
+
+        </div>
+      </div><!--    content_wrapper-->
+
+    </div><!--container-->
+
+
+
+
+  </section>
+
+</main>
+{% endblock %}
+
+{% block js %}
+    block.super
+{% endblock %}

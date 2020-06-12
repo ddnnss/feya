@@ -1,0 +1,12 @@
+<div class="main-content__sidemenu">
+    <ul class="sidemenu">
+        {% for item in rightMenu %}
+            <li class="sidemenu__item">
+                <a style="justify-content: center;" class="sidemenu__link"
+                   href="{% url 'static_page' item.static_url.name_slug %}">
+                    {{ item.static_url.name }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</div><!--content__sidemenu-->
