@@ -9,6 +9,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{%  static 'css/main.css' %}">
     <style>
+        body{
+            overflow-x: hidden;
+        }
         .content a{
             color: #00a6ff;
             text-decoration: underline;
@@ -55,6 +58,23 @@
     margin: 5px 0;
     width: 200px;
 }
+        .akcii .text-left .price {
+    font-weight: bold;
+    font-size: 21px;
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+            .akcii .text .price {
+    font-weight: bold;
+    font-size: 21px;
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+            .akcii .image-right {
+    display: inline-block;
+    margin: 10px 10px 10px 0;
+    float: right;
+}
         .redprogram {
     background: #f00;
     color: #FFF;
@@ -74,7 +94,41 @@
     position: relative;
     vertical-align: top;
 }
-        
+.order-call-field {
+    width: 521px;
+    margin: 0 auto 44px;
+    position: relative;
+}
+        .order-call-field input[type="text"] {
+    width: 470px;
+    height: 43px;
+    padding: 0 10px;
+    text-align: center;
+    font-size: 24px;
+    border: 2px solid #ff97d5;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+        .order-call-send{
+        display: inline-block;
+  align-items: center;
+  background: #f050bb;
+  margin-bottom: 10px;
+  color: #ffffff;
+  padding: 10px;
+            max-width: 150px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 2px 2px 0px #00000061;
+  box-shadow: 0 2px 2px 0px #00000061;
+  -webkit-transition: .1s linear;
+  -o-transition: .1s linear;
+  transition: .1s linear;
+            cursor: pointer;
+        }
+        .order-call-field.submit {
+    padding: 0 190px;
+}
     </style>
 </head>
 <body>
