@@ -1,10 +1,62 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'basic.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+       <main>
+  <section class="main-content">
+    <div class="container">
+      <div class="main-content_wrapper">
+        <div class="breadcrumbs">
+          <ul class="breadcrumbs-wrapper">
+            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="">Главная</a></li>
+            <li class="breadcrumbs-item">Статьи</li>
+          </ul>
+        </div>
+
+        <div class="main-content__inner">
+       {% include 'pages/left-menu.html' %}
+          <div class="main-content__center">
+            <div style="margin-bottom: 20px" class="content">
+                    <div class="content-title">
+                    <h1>Статьи</h1>
+                    </div>
+            </div>
+              <div class="news-wrapper">
+                  {% for newsItem in allBlogs %}
+          <div class="news-item">
+          <div class="news-item-img">
+               <img src="{{ newsItem.preview.url }}" alt="">
+            </div>
+            <p class="news-item-title">
+              {{ newsItem.name }}
+            </p>
+
+              {{ newsItem.content | truncatewords_html:10 | safe }}
+
+            <p class="news-item-more">
+              <a href="">Читать далee ...</a>
+            </p>
+          </div>
+        {% endfor %}
+        </div><!--          news-wrapper-->
+
+
+          </div><!--content__center-->
+        {% include 'pages/right-menu.html' %}
+
+        </div>
+      </div><!--    content_wrapper-->
+
+    </div><!--container-->
+
+
+
+
+  </section>
+
+</main>
+{% endblock %}
+
+{% block js %}
+    {{block.super}}
+{% endblock %}

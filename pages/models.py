@@ -23,6 +23,21 @@ class StaticPage(models.Model):
         verbose_name = "Статическая страница"
         verbose_name_plural = "Статические страницы"
 
+class TopMenuItem(models.Model):
+    banner_bg = models.ImageField('Картинка баннера',upload_to='banner/', blank=False, null=True)
+    name = models.CharField('Название пункта', max_length=255, blank=False, null=True)
+    event_url = models.ForeignKey(EventPage, on_delete=models.SET_NULL, blank=True, null=True,
+                                   verbose_name='Ссылка на мероприятие')
+    custom_url = models.CharField('Ссылка(без указания домена)', max_length=100, blank=True, null=True)
+    is_active = models.BooleanField('Отображать ?', default=True)
+
+    def __str__(self):
+        return f'Пункт верхнего меню: {self.name}'
+
+    class Meta:
+        verbose_name = "Пункт верхнего меню"
+        verbose_name_plural = "Пункты верхнего меню"
+
 class LeftMenuItem(models.Model):
     icon = models.ImageField('Иконка',upload_to='menu_icons/', blank=False, null=True)
     event_url = models.ForeignKey(EventPage, on_delete=models.SET_NULL, blank=True, null=True,
@@ -38,6 +53,7 @@ class LeftMenuItem(models.Model):
         verbose_name_plural = "Пункты левого меню"
 
 class RightMenuItem(models.Model):
+    name = models.CharField('Название пункта (указывать если используется Ссылка(без указания домена))', max_length=255, blank=True, null=True)
     static_url = models.ForeignKey(StaticPage, on_delete=models.SET_NULL, blank=True, null=True,
                                    verbose_name='Ссылка на статическую страницу')
     custom_url = models.CharField('Ссылка(без указания домена)', max_length=100, blank=True, null=True)
@@ -45,7 +61,13 @@ class RightMenuItem(models.Model):
     is_active = models.BooleanField('Отображать ?', default=True)
 
     def __str__(self):
-        return f'Пункт правого меню: {self.static_url.name}'
+        if not self.is_callback:
+            if self.static_url:
+                return f'Пункт правого меню: {self.static_url.name}'
+            else:
+                return f'Пункт правого меню: {self.name}'
+        else:
+            return f'Пункт правого меню: заказать звонок'
 
     class Meta:
         verbose_name = "Пункт правого меню"

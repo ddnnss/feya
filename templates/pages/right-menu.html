@@ -2,10 +2,24 @@
     <ul class="sidemenu">
         {% for item in rightMenu %}
             <li class="sidemenu__item">
-                <a style="justify-content: center;" class="sidemenu__link"
-                   href="{% url 'static_page' item.static_url.name_slug %}">
-                    {{ item.static_url.name }}
+            {% if not item.is_callback %}
+                {% if item.static_url %}
+                    <a style="justify-content: center;" class="sidemenu__link"
+                       href="{% url 'static_page' item.static_url.name_slug %}">
+                        {{ item.static_url.name }}
+                    </a>
+                {% else %}
+                     <a style="justify-content: center;" class="sidemenu__link"
+                       href="{{ item.custom_url }}">
+                        {{ item.name }}
+                    </a>
+                {% endif %}
+            {% else %}
+                 <a style="justify-content: center;" class="sidemenu__link"
+                   href="">
+                   Заказать звонок
                 </a>
+            {% endif %}
             </li>
         {% endfor %}
     </ul>

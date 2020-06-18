@@ -7,11 +7,12 @@ class Promotion(models.Model):
     auto_slug = models.BooleanField('Создать ЧПУ ?', default=True)
     name_slug = models.CharField(max_length=255, blank=True, null=True,editable=False)
     preview = models.ImageField('Картинка превью', upload_to='promotions/', blank=False, null=True)
+    main_img = models.ImageField('Картинка акции', upload_to='promotions/', blank=False, null=True)
     page_title = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
     page_description = models.TextField('Описание страницы SEO', blank=True, null=True)
     page_keywords = models.TextField('Keywords SEO', blank=True, null=True)
     content = RichTextUploadingField('Основной контент', blank=True, null=True)
-
+    is_active = models.BooleanField('Отображать ?', default=True)
     def save(self, *args, **kwargs):
         if self.auto_slug:
             self.name_slug = slugify(self.name)

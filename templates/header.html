@@ -24,36 +24,22 @@
   <div class="header__banner" style="background: url({% static 'images/b1.png' %})"></div>
   <nav class="header__menu">
     <ul class="header__menu-wrapper">
-      <li class="header__menu-item"><a class="header__menu-link" href="">Детские праздники</a>
-        <div class="header__menu-submenu ">
+        {% for topItem in topMenu %}
+      <li class="header__menu-item"><a class="header__menu-link" href="{% url 'event_page' topItem.event_url.name_slug %}">{{ topItem.name }}</a>
+         {% if topItem.event_items %}
+          <div class="header__menu-submenu ">
           <!--          headerSubMenuActive-->
           <div class="header__menu-submenu-wrapper">
             <ul class="header__menu-submenu-list">
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.Lorem</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum LoremLorem</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-            </ul>
-            <ul class="header__menu-submenu-list">
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
-              <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="">Lorem ipsum.</a></li>
+                {% for subItem in topItem.event_items.all %}
+                    <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="{% url 'event_page' subItem.name_slug %}">{{ subItem.name }}</a></li>
+                {% endfor %}
             </ul>
           </div>
         </div>
+      {% endif %}
       </li>
-      <li class="header__menu-item"><a class="header__menu-link" href="">Свадьба</a></li>
-      <li class="header__menu-item"><a class="header__menu-link" href="">Корпоративные мероприятия</a></li>
-      <li class="header__menu-item"><a class="header__menu-link" href="">Выпускные</a></li>
+        {% endfor %}
     </ul>
   </nav>
 </header>

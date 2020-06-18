@@ -1,5 +1,6 @@
 from django.db import models
 from pytils.translit import slugify
+
 from ckeditor_uploader.fields import RichTextUploadingField
 
 class EventPage(models.Model):
@@ -10,6 +11,10 @@ class EventPage(models.Model):
     page_title = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
     page_description = models.TextField('Описание страницы SEO', blank=True, null=True)
     page_keywords = models.TextField('Keywords SEO', blank=True, null=True)
+    top_menu = models.ForeignKey('pages.TopMenuItem',on_delete=models.SET_NULL,
+                                 blank=True,null=True,
+                                 verbose_name='Показывать в меню'
+                                 ,related_name='event_items')
 
 
     def save(self, *args, **kwargs):
