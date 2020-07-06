@@ -11,8 +11,8 @@ class EventPage(models.Model):
     page_title = models.CharField('Название страницы SEO', max_length=255, blank=True, null=True)
     page_description = models.TextField('Описание страницы SEO', blank=True, null=True)
     page_keywords = models.TextField('Keywords SEO', blank=True, null=True)
-    top_menu = models.ForeignKey('pages.TopMenuItem',on_delete=models.SET_NULL,
-                                 blank=True,null=True,
+    top_menu = models.ManyToManyField('pages.TopMenuItem',
+                                 blank=True,
                                  verbose_name='Показывать в меню'
                                  ,related_name='event_items')
 
@@ -28,3 +28,5 @@ class EventPage(models.Model):
     class Meta:
         verbose_name = "Мероприятие"
         verbose_name_plural = "Мероприятия"
+
+

@@ -2,59 +2,81 @@
 {% load static %}
 
 {% block content %}
-       <main>
-  <section class="main-content">
-    <div class="container">
-      <div class="main-content_wrapper">
-        <div class="breadcrumbs">
-          <ul class="breadcrumbs-wrapper">
-            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="">Главная</a></li>
-            <li class="breadcrumbs-item">Новости</li>
-          </ul>
-        </div>
-
-        <div class="main-content__inner">
-       {% include 'pages/left-menu.html' %}
-          <div class="main-content__center">
-            <div style="margin-bottom: 20px" class="content">
-                    <div class="content-title">
-                    <h1>Новости</h1>
+    <main>
+        <section class="main-content">
+            <div class="container">
+                <div class="main-content_wrapper">
+                    <div class="breadcrumbs">
+                        <ul class="breadcrumbs-wrapper">
+                            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="/">Главная</a></li>
+                            <li class="breadcrumbs-item">Новости</li>
+                        </ul>
                     </div>
-            </div>
-              <div class="news-wrapper">
-                  {% for newsItem in allNews %}
-          <div class="news-item">
-          <div class="news-item-img">
-               <img src="{{ newsItem.preview.url }}" alt="">
-            </div>
-            <p class="news-item-title">
-              {{ newsItem.name }}
-            </p>
 
-              {{ newsItem.content | truncatewords_html:10 | safe }}
+                    <div class="main-content__inner">
+                        {% include 'pages/left-menu.html' %}
+                        <div class="main-content__center">
+                            <div style="margin-bottom: 20px" class="content">
+                                <div class="content-title">
+                                    <h1>Новости</h1>
+                                </div>
+                            </div>
+                            <div class="news-wrapper">
+                                {% for newsItem in allNews %}
+                                    <div class="news-item">
+                                        <div class="news-item-img">
+                                            <img src="{{ newsItem.preview.url }}" alt="">
+                                        </div>
+                                        <p class="news-item-title">
+                                            {{ newsItem.name }}
+                                        </p>
 
-            <p class="news-item-more">
-              <a href="">Читать далee ...</a>
-            </p>
-          </div>
-        {% endfor %}
-        </div><!--          news-wrapper-->
+                                        {{ newsItem.content | truncatewords_html:10 | safe }}
+
+                                        <p class="news-item-more">
+                                            <a href="{% url 'news_single_page' newsItem.name_slug %}">Читать далee ...</a>
+                                        </p>
+                                    </div>
+                                {% endfor %}
+                            </div><!--          news-wrapper-->
+                                     {% if allNews.paginator.num_pages > 1  %}
+                                <div class="pagination">
+                                    {% if allNews.has_previous %}
+                                        <a style="margin-right: 15px"  href="{% url 'promotions_page' %}" class="pagination-arrow">
+                                            <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M10.2852 0.333C10.7142 -0.111 11.4282 -0.111 11.8722 0.333C12.3012 0.762 12.3012 1.476 11.8722 1.904L3.82523 9.951H30.3792C30.9982 9.952 31.4902 10.444 31.4902 11.063C31.4902 11.682 30.9982 12.19 30.3792 12.19H3.82523L11.8722 20.222C12.3012 20.666 12.3012 21.381 11.8722 21.809C11.4282 22.253 10.7132 22.253 10.2852 21.809L0.333235 11.857C-0.110765 11.428 -0.110765 10.714 0.333235 10.286L10.2852 0.333Z" fill="#1E201D"/></svg>
+                                        </a>
+                                    {% endif %}
+                                    <ul class="pagination-ul">
+                                        {% for pg in allNews.paginator.page_range %}
+                                            {% if allNews.number == pg %}
+                                                <li class="pagination-active">{{pg}}</li>
+                                            {% elif pg > allNews.number|add:'-6' and pg < allNews.number|add:'6' %}
+                                                <li><a class="pagination-link" href="?{% if pg > 1 %}page={{ pg }}{% endif %}">{{pg}}</a></li>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </ul>
+                                    {% if allNews.has_next %}
+                                        <a href="?page={{ allNews.paginator.num_pages }}" class="pagination-arrow">
+                                            <svg width="32" height="23" viewBox="0 0 32 23" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M21.205 0.333C20.776 -0.111 20.062 -0.111 19.618 0.333C19.189 0.762 19.189 1.476 19.618 1.904L27.665 9.951H1.111C0.492 9.952 0 10.444 0 11.063C0 11.682 0.492 12.19 1.111 12.19H27.665L19.618 20.222C19.189 20.666 19.189 21.381 19.618 21.809C20.062 22.253 20.777 22.253 21.205 21.809L31.157 11.857C31.601 11.428 31.601 10.714 31.157 10.286L21.205 0.333Z" fill="#1E201D"/></svg>
+                                        </a>
+                                    {% endif %}
+                                </div>
+                            {% endif %}
+
+                        </div><!--content__center-->
+                        {% include 'pages/right-menu.html' %}
+
+                    </div>
+                </div><!--    content_wrapper-->
+
+            </div><!--container-->
 
 
-          </div><!--content__center-->
-        {% include 'pages/right-menu.html' %}
-
-        </div>
-      </div><!--    content_wrapper-->
-
-    </div><!--container-->
 
 
+        </section>
 
-
-  </section>
-
-</main>
+    </main>
 {% endblock %}
 
 {% block js %}

@@ -110,7 +110,8 @@ INSTALLED_APPS = [
     'events_content',
     'blog',
     'news',
-    'promotions'
+    'promotions',
+    'reviews'
 ]
 
 MIDDLEWARE = [

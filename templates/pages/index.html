@@ -3,63 +3,70 @@
 
 {% block content %}
     <main>
-  <section class="main-content">
-    <div class="container">
-      <div class="main-content_wrapper">
-        <div class="breadcrumbs">
-          <ul class="breadcrumbs-wrapper">
-            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="">Главная</a></li>
-            <li class="breadcrumbs-item">Мероприятия</li>
-          </ul>
-        </div>
-        <div class="news-wrapper">
-          <div class="news-item">
-          <div class="news-item-img">
-               <img src="http://placehold.it/500x200" alt="">
-            </div>
-            <p class="news-item-title">
-              Lorem ipsum dolor sit amet.
-            </p>
-            <p class="news-item-description">
-              Lorem ipsum dolor sissitatibus que labore recusandae repellendus sint!
-            </p>
-            <p class="news-item-more">
-              <a href="">Читать далee ...</a>
-            </p>
-          </div>
-          <div class="news-item">
-            <img src="http://placehold.it/500x200" alt="">
-            <p class="news-item-title">
-              Lorem ipsum dolor sit amet.
-            </p>
-            <p class="news-item-description">
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consectetur deleniti dolor eum illo libero, maiores necessitatibus perspiciatis placeat quidem quo repellendus sint unde? Aperiam explicabo, itaque labore recusandae repellendus sint!
-            </p>
-            <p class="news-item-more">
-              <a href="">Читать далee ...</a>
-            </p>
+        <section class="main-content">
+            <div class="container">
+                <div class="main-content_wrapper">
+                    {#        <div class="breadcrumbs">#}
+                    {#          <ul class="breadcrumbs-wrapper">#}
+                    {#            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="">Главная</a></li>#}
+                    {#            <li class="breadcrumbs-item">Мероприятия</li>#}
+                    {#          </ul>#}
+                    {#        </div>#}
+                    <div class="news-wrapper">
+                        {% for newsItem in news %}
+                            <div class="news-item">
+                                <div class="news-item-img">
+                                    <img src="{{ newsItem.preview.url }}" alt="">
+                                </div>
+                                <p class="news-item-title">
+                                    {{ newsItem.name }}
+                                </p>
 
-          </div>
-        </div><!--          news-wrapper-->
-        <div class="main-content__inner">
-       {% include 'pages/left-menu.html' %}
-          <div class="main-content__center">
-            {{ page_content | safe }}
+                                {{ newsItem.content | truncatewords_html:10 | safe }}
 
-          </div><!--content__center-->
-        {% include 'pages/right-menu.html' %}
+                                <p class="news-item-more">
+                                    <a href="">Читать далee ...</a>
+                                </p>
+                            </div>
+                        {% endfor %}
 
-        </div>
-      </div><!--    content_wrapper-->
-
-    </div><!--container-->
+                    </div><!--          news-wrapper-->
+                    <div class="main-content__inner">
+                        {% include 'pages/left-menu.html' %}
+                        <div class="main-content__center">
+                            <div class="content">
+                                {{ page_content | safe }}
+                                <div class="order-call-form2">
+                                    <h2 align="center">Сделать заказ</h2>
+                                    <div class="order-call-field">
+                                        <input type="text" placeholder="Ваше имя" id="order-call-name">
+                                    </div>
+                                    <div class="order-call-field">
+                                        <input type="text" placeholder="Номер телефона" id="order-call-phone"> <input type="hidden" id="hidden-field"> <input type="text" id="hidden-field-text" value="not-empty" style="display:none;">
+                                    </div>
+                                    <div class="order-call-field submit">
+                                       <button type="submit" class="btn sidemenu__link">Заказать</button>
+                                    </div>
+                                    <div class="order-info-text">
+                                    </div>
+                                </div>
+                            </div>
 
 
+                        </div><!--content__center-->
+                        {% include 'pages/right-menu.html' %}
+
+                    </div>
+                </div><!--    content_wrapper-->
+
+            </div><!--container-->
 
 
-  </section>
 
-</main>
+
+        </section>
+
+    </main>
 {% endblock %}
 
 {% block js %}

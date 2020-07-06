@@ -21,18 +21,19 @@
 
     </div>
   </div>
-  <div class="header__banner" style="background: url({% static 'images/b1.png' %})"></div>
+  <div id="banner" class="header__banner" style="background: url({% static 'images/b1.png' %})"></div>
   <nav class="header__menu">
     <ul class="header__menu-wrapper">
         {% for topItem in topMenu %}
-      <li class="header__menu-item"><a class="header__menu-link" href="{% url 'event_page' topItem.event_url.name_slug %}">{{ topItem.name }}</a>
+      <li class="header__menu-item"><a  onmouseover="changeBanner('{{ topItem.banner_bg.url }}','{{ topItem.id }}')" class="header__menu-link" href="{% url 'event_page' topItem.event_url.name_slug %}">{{ topItem.name }}</a>
          {% if topItem.event_items %}
-          <div class="header__menu-submenu ">
+          <div style="z-index:100" id="sub_{{ topItem.id }}" class="header__menu-submenu " onmouseleave="closeMenu()">
           <!--          headerSubMenuActive-->
           <div class="header__menu-submenu-wrapper">
             <ul class="header__menu-submenu-list">
                 {% for subItem in topItem.event_items.all %}
                     <li class="header__menu-submenu-item"><a class="header__menu-submenu-link" href="{% url 'event_page' subItem.name_slug %}">{{ subItem.name }}</a></li>
+
                 {% endfor %}
             </ul>
           </div>

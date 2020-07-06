@@ -6,6 +6,8 @@
     <title>{{ title }}</title>
     <meta name="description" content="{{ description }}"/>
     <meta name="keywords" content= "{{ keywords }}" />
+    <link rel="shortcut icon" href="{% static 'images/favicon.ico'%}" type="image/x-icon">
+	<link rel="icon" href="{% static 'images/favicon.ico'%}" type="image/x-icon">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="{%  static 'css/main.css' %}">
     <style>
@@ -13,8 +15,8 @@
             overflow-x: hidden;
         }
         .content a{
-            color: #00a6ff;
-            text-decoration: underline;
+            //color: #00a6ff;
+            //text-decoration: underline;
         }
         .content h1{
             font-family: 'Montserrat Bold',sans-serif;
@@ -95,12 +97,12 @@
     vertical-align: top;
 }
 .order-call-field {
-    width: 521px;
-    margin: 0 auto 44px;
+    width: 100%;
+    margin-bottom: 30px;
     position: relative;
 }
         .order-call-field input[type="text"] {
-    width: 470px;
+    width: 100%;
     height: 43px;
     padding: 0 10px;
     text-align: center;
@@ -127,7 +129,7 @@
             cursor: pointer;
         }
         .order-call-field.submit {
-    padding: 0 190px;
+
 }
         ol.third-example2 {
     color: #ff97d5;
@@ -142,6 +144,68 @@
     background: #ff97d5;
     padding: 10px 0;
 }
+        .pagination-ul{
+            display: flex;
+        }
+        .pagination{
+            display: flex;
+            align-items: center;
+        }
+         .pagination-ul li{
+             margin-right: 10px;
+              padding: 5px 10px;
+         }
+        .pagination-link{
+            color: #00a6ff;
+            font-size: 18px;
+        }
+        .pagination-active{
+            font-size: 18px;
+            background: #00a6ff;
+            color: #ffffff;
+            padding: 5px 10px;
+        }
+        .btn{
+            border: none;
+            margin: 0 auto;
+            cursor: pointer;
+            padding: 15px 70px;
+
+        }
+        .events-item {
+    width: 148px;
+    height: auto;
+    float: left;
+    margin: 0 9px 30px;
+}
+        .events-image {
+    width: 148px;
+    height: 148px;
+    overflow: hidden;
+    display: block;
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+        .sidemenu__link{
+
+            font-size: 15px;
+    letter-spacing: -0.9px;
+
+        }
+        img.box {
+    width: 225px;
+}
+        .events-title {
+    width: 138px;
+    padding: 0 5px;
+    height: 55px;
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    font-size: 15px;
+    color: #ef49b5 !important;
+}
     </style>
 </head>
 <body>
@@ -152,7 +216,22 @@
     {% include 'footer.html' %}
 </div>
 {% block js %}
+    <script>
+    function changeBanner(img,id) {
+        document.getElementById('banner').style.background = `url('${img}')`;
 
+
+        closeMenu()
+
+         document.getElementById(`sub_${id}`).classList.add('headerSubMenuActive')
+    }
+    function closeMenu() {
+        let menus = document.getElementsByClassName('header__menu-submenu')
+       for (x of menus){
+            x.classList.remove('headerSubMenuActive')
+        }
+    }
+    </script>
 {% endblock %}
 
 

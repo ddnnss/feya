@@ -9,7 +9,7 @@
                     <div class="breadcrumbs">
                         <ul class="breadcrumbs-wrapper">
                             <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="/">Главная</a></li>
-                            <li class="breadcrumbs-item">Статьи</li>
+                            <li class="breadcrumbs-item">Отзывы</li>
                         </ul>
                     </div>
 
@@ -18,28 +18,37 @@
                         <div class="main-content__center">
                             <div style="margin-bottom: 20px" class="content">
                                 <div class="content-title">
-                                    <h1>Статьи</h1>
+                                    <h1>Отзывы</h1>
                                 </div>
                             </div>
                             <div class="news-wrapper">
                                 {% for newsItem in allNews %}
-                                    <div class="news-item">
-                                        <div class="news-item-img">
-                                            <img src="{{ newsItem.preview.url }}" alt="">
+                                    <div style="    display: grid;
+    grid-template-columns: 1fr 2fr;
+}
+
+" class="news-item">
+                                        <div style=" margin-right: 20px" class="news-item-img">
+                                            <img style=" object-fit: cover;
+    border-radius: 50%;   width: 148px;
+    height: 148px;" src="{{ newsItem.get_img }}" alt="">
                                         </div>
-                                        <p class="news-item-title">
-                                            {{ newsItem.name }}
-                                        </p>
+                                        <div class="">
+                                            <p class="news-item-title">
+                                                {{ newsItem.name }}
+                                            </p>
+                                            <p>
+                                                {{ newsItem.content | safe }}
+                                            </p>
 
-                                        {{ newsItem.content | truncatewords_html:10 | safe }}
 
-                                        <p class="news-item-more">
-                                            <a href="{% url 'blog_page' newsItem.name_slug %}">Читать далee ...</a>
-                                        </p>
+                                        </div>
+
+
                                     </div>
                                 {% endfor %}
                             </div><!--          news-wrapper-->
-                            {% if allNews.paginator.num_pages > 1  %}
+                                     {% if allNews.paginator.num_pages > 1  %}
                                 <div class="pagination">
                                     {% if allNews.has_previous %}
                                         <a style="margin-right: 15px"  href="{% url 'promotions_page' %}" class="pagination-arrow">

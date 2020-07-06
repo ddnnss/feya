@@ -1,10 +1,50 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends 'basic.html' %}
+{% load static %}
 
-</body>
-</html>
+{% block content %}
+     <main>
+  <section class="main-content">
+    <div class="container">
+      <div class="main-content_wrapper">
+        <div class="breadcrumbs">
+          <ul class="breadcrumbs-wrapper">
+            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="/">Главная</a></li>
+            <li class="breadcrumbs-item"><a class="breadcrumbs-link" href="{% url 'blogs_page' %}">Все новости</a></li>
+            <li class="breadcrumbs-item">{{ page.name }}</li>
+          </ul>
+        </div>
+           {% if request.user.is_staff %}
+               <div style="margin-bottom: 30px" class="">
+                <a target="_blank" href="/admin/blog/blog/{{ page.id }}/change/">редактировать</a>
+               </div>
+
+            {% endif %}
+        <div class="main-content__inner">
+
+       {% include 'pages/left-menu.html' %}
+          <div class="main-content__center">
+              <div class="content">
+                  <img src="{{ page.main_img.url }}" alt="">
+                   {{ page.content | safe }}
+              </div>
+
+
+          </div><!--content__center-->
+        {% include 'pages/right-menu.html' %}
+
+        </div>
+      </div><!--    content_wrapper-->
+
+    </div><!--container-->
+
+
+
+
+  </section>
+
+</main>
+{% endblock %}
+
+{% block js %}
+    {{block.super}}
+{% endblock %}
